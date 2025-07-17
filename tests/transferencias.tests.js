@@ -2,6 +2,7 @@ import http from 'k6/http';
 import { sleep, check } from 'k6';
 import { obterToken } from '../helpers/autenticacao.js';
 const postTransferencias = JSON.parse(open('../fixtures/postTransferencias.json'));
+import { pegarBaseUrl } from '../utils/variaveis.js';
 
 export const options = {
   interations: 1,
@@ -9,7 +10,8 @@ export const options = {
 
 export default function() {
   const token = obterToken();
-  let url = 'http://localhost:3000/transferencias';
+  const baseUrl = pegarBaseUrl();
+  let url = `${baseUrl}/transferencias`;
 
   const payload = JSON.stringify(postTransferencias);
 
