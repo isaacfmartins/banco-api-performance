@@ -2,6 +2,7 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
 const postLogin = JSON.parse(open('../fixtures/postLogin.json'));
+import { pegarBaseUrl } from '../utils/variaveis.js';
 
 export const options = {
     // iterations: 1,
@@ -20,7 +21,8 @@ export const options = {
 };
 
 export default function () {
-    const url = 'http://localhost:3000/login';
+    const baseUrl = pegarBaseUrl();
+    const url = `${baseUrl}/login`;
     const payload = JSON.stringify(postLogin);
 
     const params = {
@@ -35,11 +37,6 @@ export default function () {
         'validate status 200': (r) => r.status === 200,
         'validate token is string': (r) => typeof(r.json().token) === 'string',
     });
-
-  
-
-    console.log(`Response status: ${res.status}`);
-    console.log(`Response body: ${res.body}`);
 
     sleep(1);
 }
