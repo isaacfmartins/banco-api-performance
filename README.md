@@ -34,7 +34,7 @@ banco-api-performance/
 ## 🎯 Objetivo de Cada Grupo de Arquivos
 
 - `cofig/`: 
-  - `config.local.json`: Contem o valor da variavel local
+  - `config.local.json`: Contem o valor da variavel BASE_URL local
 - `fixtures/`: 
   - `postLogin.json`: Contem o payload para o endpoint login
   - `postTransferencia`: Contem o payload para o endpoint transferencias
@@ -44,7 +44,7 @@ banco-api-performance/
   - `login.tests.js`: Verificação do endpoints de login
   - `transferencias.tests.js`: Verificação do endpoints de transferencias
 - `utils/`: 
-  - `variaveis.js`: Funções que verificam a existência de da variavel
+  - `variaveis.js`: Função que verifica a existência da variavel BASE_URL e realiza a exportação.
 
 ## 🛠️ Modo de Instalação
 
@@ -72,7 +72,7 @@ Ou consulte a [documentação oficial do k6](https://k6.io/docs/get-started/inst
 Antes de executar, defina a variável de ambiente `BASE_URL` apontando para a API que deseja testar:
 
 ```bash
-export BASE_URL=http://localhost:3000
+k6 run tests/login.tests.js -e BASE_URL=http://localhost:3000
 ```
 
 Para executar um dos testes, utilize:
