@@ -4,8 +4,14 @@ import { sleep, check } from 'k6';
 
 export const options = {
     // iterations: 50,
-    vus: 10,
-    duration: '30s',
+    // vus: 10,
+    // duration: '30s',
+    stages: [
+        { duration: '5s', target: 10 }, // ramp-up to 10 users over 5 seconds
+        { duration: '20s', target: 10 }, // stay at 10 users for 20 seconds
+        { duration: '5s', target: 0}, // ramp-down to 0 users over 5 seconds
+    ],
+
     thresholds: {
         http_req_duration: ['p(90)<3000', 'max<5000'],
         http_req_failed: ['rate<0.01'],
